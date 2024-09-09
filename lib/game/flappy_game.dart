@@ -7,7 +7,7 @@ import 'package:flame_audio/flame_audio.dart';
 import 'package:flappy/components/background.dart';
 import 'package:flappy/components/bird.dart';
 import 'package:flappy/components/ground.dart';
-import 'package:flappy/components/pipe_group.dart';
+import 'package:flappy/components/cactus_group.dart';
 import 'package:flappy/components/cloud.dart';
 import 'package:flappy/game/assets.dart';
 import 'package:flappy/screen/game_over.dart';
@@ -18,7 +18,7 @@ class FlappyGame extends FlameGame with TapDetector, HasCollisionDetection {
   late Bird bird;
   late Timer interval = Timer(5, repeat: true, autoStart: false);
   late TextComponent score;
-  final List<PipeGroup> _pipes = [];
+  final List<CactusGroup> _pipes = [];
   int level = 1;
 
   int playerScore = 0;
@@ -55,7 +55,7 @@ class FlappyGame extends FlameGame with TapDetector, HasCollisionDetection {
     final newInterval = Timer(time, repeat: true, autoStart: false);
 
     intervalCallback() async {
-      final newPipe = PipeGroup();
+      final newPipe = CactusGroup();
       _pipes.add(newPipe);
       await add(newPipe);
       interval.stop();
@@ -85,7 +85,7 @@ class FlappyGame extends FlameGame with TapDetector, HasCollisionDetection {
     resume();
   }
 
-  void removePipe(PipeGroup pipe) {
+  void removePipe(CactusGroup pipe) {
     _pipes.remove(pipe);
   }
 

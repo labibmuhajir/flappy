@@ -6,14 +6,14 @@ import 'package:flame/flame.dart';
 import 'package:flappy/game/assets.dart';
 import 'package:flappy/game/config.dart';
 import 'package:flappy/game/flappy_game.dart';
-import 'package:flappy/game/pipe_position.dart';
+import 'package:flappy/game/cactus_position.dart';
 
-class Pipe extends SpriteComponent with HasGameRef<FlappyGame> {
-  Pipe({required this.height, required this.pipePosition});
+class Cactus extends SpriteComponent with HasGameRef<FlappyGame> {
+  Cactus({required this.height, required this.pipePosition});
 
   @override
   double height;
-  final PipePosition pipePosition;
+  final CactusPosition pipePosition;
 
   @override
   FutureOr<void> onLoad() async {
@@ -22,11 +22,11 @@ class Pipe extends SpriteComponent with HasGameRef<FlappyGame> {
     size = Vector2(50, height);
 
     switch (pipePosition) {
-      case PipePosition.top:
+      case CactusPosition.top:
         position.y = 0;
         sprite = Sprite(pipeRotated);
         break;
-      case PipePosition.bottom:
+      case CactusPosition.bottom:
         sprite = Sprite(pipe);
         position.y = gameRef.size.y - size.y - Config.groundHeight;
         break;

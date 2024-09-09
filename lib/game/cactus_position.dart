@@ -1,0 +1,1 @@
+enum CactusPosition { top, bottom }
