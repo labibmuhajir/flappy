@@ -1,0 +1,2 @@
+/Volumes/project/dev/flutter/flappy/android/app/.cxx/RelWithDebInfo/2o6x1b1w/arm64-v8a/CMakeFiles/rebuild_cache.dir
+/Volumes/project/dev/flutter/flappy/android/app/.cxx/RelWithDebInfo/2o6x1b1w/arm64-v8a/CMakeFiles/edit_cache.dir

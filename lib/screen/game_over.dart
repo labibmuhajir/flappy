@@ -2,11 +2,12 @@ import 'package:flappy/game/assets.dart';
 import 'package:flutter/material.dart';
 
 class GameOver extends StatelessWidget {
-  const GameOver(
-      {super.key,
-      required this.onRestart,
-      required this.onResume,
-      required this.score});
+  const GameOver({
+    super.key,
+    required this.onRestart,
+    required this.onResume,
+    required this.score,
+  });
 
   static const id = 'game_over';
 
@@ -18,7 +19,7 @@ class GameOver extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Material(
-        color: Colors.black.withOpacity(0.4),
+        color: Colors.black.withAlpha(4),
         child: Center(
           child: Column(
             mainAxisSize: MainAxisSize.min,
@@ -32,40 +33,26 @@ class GameOver extends StatelessWidget {
                   fontSize: 60,
                 ),
               ),
-              const SizedBox(
-                height: 24,
-              ),
+              const SizedBox(height: 24),
               Image.asset(Assets.gameOver),
-              const SizedBox(
-                height: 16,
-              ),
+              const SizedBox(height: 16),
               ElevatedButton(
                 onPressed: onRestart,
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.orange,
-                ),
+                style: ElevatedButton.styleFrom(backgroundColor: Colors.orange),
                 child: const Text(
                   'Restart',
-                  style: TextStyle(
-                    color: Colors.white,
-                  ),
+                  style: TextStyle(color: Colors.white),
                 ),
               ),
-              const SizedBox(
-                height: 16,
-              ),
+              const SizedBox(height: 16),
               ElevatedButton(
                 onPressed: onResume,
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.orange,
-                ),
+                style: ElevatedButton.styleFrom(backgroundColor: Colors.orange),
                 child: const Text(
                   'Resume',
-                  style: TextStyle(
-                    color: Colors.white,
-                  ),
+                  style: TextStyle(color: Colors.white),
                 ),
-              )
+              ),
             ],
           ),
         ),
