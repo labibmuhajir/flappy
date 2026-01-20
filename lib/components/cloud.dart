@@ -6,7 +6,7 @@ import 'package:flame/flame.dart';
 import 'package:flappy/game/assets.dart';
 import 'package:flappy/game/flappy_game.dart';
 
-class Cloud extends SpriteComponent with HasGameRef<FlappyGame> {
+class Cloud extends SpriteComponent with HasGameReference<FlappyGame> {
   Cloud();
 
   @override
@@ -14,10 +14,9 @@ class Cloud extends SpriteComponent with HasGameRef<FlappyGame> {
     final cloud = await Flame.images.load(Assets.clouds);
     sprite = Sprite(cloud);
     position = Vector2(0, -10);
-    size = Vector2(gameRef.size.x, 30);
-    add(RectangleHitbox(
-      position: Vector2(0, 0),
-      size: Vector2(gameRef.size.x, 1),
-    ));
+    size = Vector2(game.size.x, 30);
+    add(
+      RectangleHitbox(position: Vector2(0, 0), size: Vector2(game.size.x, 1)),
+    );
   }
 }

@@ -13,21 +13,22 @@ import 'package:flutter/animation.dart';
 import 'package:flutter/material.dart';
 
 class Bird extends SpriteGroupComponent<BirdMovement>
-    with HasGameRef<FlappyGame>, CollisionCallbacks {
+    with HasGameReference<FlappyGame>, CollisionCallbacks {
   @override
   FutureOr<void> onLoad() async {
-    final birdIdle = await gameRef.loadSprite(Assets.birdMidFlap);
-    final birdUp = await gameRef.loadSprite(Assets.birdUpFlap);
-    final birdDown = await gameRef.loadSprite(Assets.birdDownFlap);
+    final birdIdle = await game.loadSprite(Assets.birdMidFlap);
+    final birdUp = await game.loadSprite(Assets.birdUpFlap);
+    final birdDown = await game.loadSprite(Assets.birdDownFlap);
 
-    size = Vector2(50, 40);
-    position = Vector2(50, gameRef.size.y / 2 - size.y / 2);
-    current = BirdMovement.idle;
     sprites = {
       BirdMovement.idle: birdIdle,
       BirdMovement.up: birdUp,
-      BirdMovement.down: birdDown
+      BirdMovement.down: birdDown,
     };
+
+    size = Vector2(50, 40);
+    position = Vector2(50, game.size.y / 2 - size.y / 2);
+    current = BirdMovement.idle;
 
     add(CircleHitbox());
   }
@@ -42,10 +43,7 @@ class Bird extends SpriteGroupComponent<BirdMovement>
     add(
       MoveByEffect(
         Vector2(0, Config.gravity),
-        EffectController(
-          duration: 0.2,
-          curve: Curves.decelerate,
-        ),
+        EffectController(duration: 0.2, curve: Curves.decelerate),
         onComplete: () => current = BirdMovement.down,
       ),
     );
@@ -55,18 +53,20 @@ class Bird extends SpriteGroupComponent<BirdMovement>
 
   void gameOver() {
     FlameAudio.play(Assets.collision);
-    gameRef.overlays.add(GameOver.id);
-    gameRef.interval.pause();
-    gameRef.pauseEngine();
+    game.overlays.add(GameOver.id);
+    game.interval.pause();
+    game.pauseEngine();
   }
 
   void restart() {
-    position = Vector2(50, gameRef.size.y / 2 - size.y / 2);
+    position = Vector2(50, game.size.y / 2 - size.y / 2);
   }
 
   @override
   void onCollisionStart(
-      Set<Vector2> intersectionPoints, PositionComponent other) {
+    Set<Vector2> intersectionPoints,
+    PositionComponent other,
+  ) {
     super.onCollisionStart(intersectionPoints, other);
     gameOver();
   }

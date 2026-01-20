@@ -8,20 +8,19 @@ import 'package:flappy/game/assets.dart';
 import 'package:flappy/game/config.dart';
 import 'package:flappy/game/flappy_game.dart';
 
-class Ground extends ParallaxComponent<FlappyGame> with HasGameRef<FlappyGame> {
+class Ground extends ParallaxComponent<FlappyGame>
+    with HasGameReference<FlappyGame> {
   @override
   FutureOr<void> onLoad() async {
     final ground = await Flame.images.load(Assets.ground);
     parallax = Parallax([
-      ParallaxLayer(
-        ParallaxImage(ground, fill: LayerFill.none),
-      )
+      ParallaxLayer(ParallaxImage(ground, fill: LayerFill.none)),
     ]);
 
     add(
       RectangleHitbox(
-        position: Vector2(0, gameRef.size.y - Config.groundHeight),
-        size: Vector2(gameRef.size.x, Config.groundHeight),
+        position: Vector2(0, game.size.y - Config.groundHeight),
+        size: Vector2(game.size.x, Config.groundHeight),
       ),
     );
   }

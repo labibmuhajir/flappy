@@ -8,7 +8,7 @@ import 'package:flappy/game/config.dart';
 import 'package:flappy/game/flappy_game.dart';
 import 'package:flappy/game/cactus_position.dart';
 
-class Cactus extends SpriteComponent with HasGameRef<FlappyGame> {
+class Cactus extends SpriteComponent with HasGameReference<FlappyGame> {
   Cactus({required this.height, required this.pipePosition});
 
   @override
@@ -28,7 +28,7 @@ class Cactus extends SpriteComponent with HasGameRef<FlappyGame> {
         break;
       case CactusPosition.bottom:
         sprite = Sprite(pipe);
-        position.y = gameRef.size.y - size.y - Config.groundHeight;
+        position.y = game.size.y - size.y - Config.groundHeight;
         break;
     }
     add(RectangleHitbox());
